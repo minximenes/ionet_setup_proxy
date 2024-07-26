@@ -41,6 +41,8 @@ sudo cat << EOF > ~/.docker/config.json
 EOF
 
 # test connnection
-docker run --rm curlimages/curl curl -s ip.sb
+docker run --rm curlimages/curl  sh -c \
+'echo -n "container proxy ip: " && curl -s ip.sb'
+
 docker rmi curlimages/curl >/dev/null
 echo "proxy for container has been setted"
