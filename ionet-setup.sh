@@ -248,6 +248,10 @@ else
     docker-compose --version
 fi
 
+# proxy
+curl -sL https://raw.githubusercontent.com/minximenes/ionet_setup_proxy/main/proxy-docker.sh -o proxy-docker.sh
+chmod +x proxy-docker.sh && ./proxy-docker.sh
+
 # Test / Install nvidia-docker
 if [[ ! -z "$NVIDIA_PRESENT" ]]; then
     if sudo docker run --gpus all nvidia/cuda:11.0.3-base-ubuntu18.04 nvidia-smi &>/dev/null; then
