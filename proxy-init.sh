@@ -60,13 +60,12 @@ sudo systemctl enable privoxy
 sudo systemctl restart privoxy
 sudo systemctl status privoxy
 
-echo "\n"
-echo "proxy for terminal"
+echo && echo "proxy for terminal"
 sudo echo "export http_proxy=http://127.0.0.1:8118">> /etc/profile
 sudo echo "export https_proxy=http://127.0.0.1:8118">> /etc/profile
 sudo echo "export no_proxy=localhost,127.0.0.1">> /etc/profile
 # no sudo
 source /etc/profile
 # test connnection
-echo "proxy ip: " && curl -s ip.sb
+echo -n "proxy ip: " && curl -s ip.sb
 echo "proxy for terminal has been setted"

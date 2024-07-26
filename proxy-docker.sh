@@ -1,7 +1,6 @@
 # !/bin/bash
 
-echo "\n"
-echo "proxy for docker pull"
+echo && echo "proxy for docker pull"
 # /etc/systemd/system/docker.service.d
 sudo mkdir -p /etc/systemd/system/docker.service.d
 cat << EOF > http-proxy.tmp
@@ -18,8 +17,7 @@ sudo systemctl restart docker
 docker pull curlimages/curl
 echo "proxy for docker pull has been setted"
 
-echo "\n"
-echo "proxy for container"
+echo && echo "proxy for container"
 docker0_ip=$(ip addr show docker0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
 
 sudo sed -i "s/# listen-address 172.17.0.1/listen-address $docker0_ip/g" /etc/privoxy/config
