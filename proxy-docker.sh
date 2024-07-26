@@ -1,5 +1,6 @@
 # !/bin/bash
 
+echo "\n"
 echo "proxy for docker pull"
 # /etc/systemd/system/docker.service.d
 sudo mkdir -p /etc/systemd/system/docker.service.d
@@ -13,10 +14,11 @@ sudo mv http-proxy.tmp /etc/systemd/system/docker.service.d/http-proxy.conf
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 
-echo "proxy for docker pull has been setted"
 # test connnection
 docker pull curlimages/curl
+echo "proxy for docker pull has been setted"
 
+echo "\n"
 echo "proxy for container"
 docker0_ip=$(ip addr show docker0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
 
@@ -39,7 +41,7 @@ sudo cat << EOF > ~/.docker/config.json
 }
 EOF
 
-echo "proxy for container has been setted"
 # test connnection
-docker run --rm curlimages/curl curl ip.sb
+docker run --rm curlimages/curl curl -s ip.sb
 docker rmi curlimages/curl >/dev/null
+echo "proxy for container has been setted"

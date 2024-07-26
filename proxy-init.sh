@@ -3,7 +3,7 @@
 if [ -n "$1" ]; then
     PROXY_SERVER=$1
 else
-    echo -n "Please input PROXY_SERVER_IP:"
+    echo -n "Please input PROXY_SERVER_IP : "
     read PROXY_SERVER
 fi
 
@@ -60,12 +60,13 @@ sudo systemctl enable privoxy
 sudo systemctl restart privoxy
 sudo systemctl status privoxy
 
+echo "\n"
 echo "proxy for terminal"
 sudo echo "export http_proxy=http://127.0.0.1:8118">> /etc/profile
 sudo echo "export https_proxy=http://127.0.0.1:8118">> /etc/profile
 sudo echo "export no_proxy=localhost,127.0.0.1">> /etc/profile
 # no sudo
 source /etc/profile
-echo "proxy for terminal has been setted"
 # test connnection
-echo "Proxy IP: " && curl ip.sb
+echo "proxy ip: " && curl -s ip.sb
+echo "proxy for terminal has been setted"
