@@ -46,6 +46,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable shadowsocks.service
 sudo systemctl restart shadowsocks.service
 sudo systemctl status shadowsocks.service
+echo
 
 # http
 # port 8118
