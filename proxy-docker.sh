@@ -19,6 +19,11 @@ docker pull curlimages/curl
 
 echo "proxy for container"
 docker0_ip=$(ip addr show docker0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
+
+sudo sed -i "s/# listen-address 172.17.0.1/listen-address $docker0_ip/g" /etc/privoxy/config
+sudo systemctl restart privoxy
+sudo systemctl status privoxy
+
 sudo mkdir -p ~/.docker/
 sudo cat << EOF > ~/.docker/config.json
 {

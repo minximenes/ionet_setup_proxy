@@ -3,7 +3,7 @@
 if [ -n "$1" ]; then
     PROXY_SERVER=$1
 else
-    echo "Please input PROXY_SERVER_IP:"
+    echo -n "Please input PROXY_SERVER_IP:"
     read PROXY_SERVER
 fi
 
@@ -43,7 +43,7 @@ WantedBy=multi-user.target
 EOF
 sudo mv shadowsocks.svc.tmp /etc/systemd/system/shadowsocks.service
 sudo systemctl daemon-reload
-sudo systemctl enable shadowsocks.service >/dev/null
+sudo systemctl enable shadowsocks.service
 sudo systemctl restart shadowsocks.service
 sudo systemctl status shadowsocks.service
 
@@ -54,9 +54,9 @@ sudo sed -i '/^#/d' /etc/privoxy/config
 
 # docker0_ip=$(ip addr show docker0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
 docker0_ip="172.17.0.1"
-sudo echo "listen-address $docker0_ip:8118">> /etc/privoxy/config
+sudo echo "# listen-address $docker0_ip:8118">> /etc/privoxy/config
 sudo echo "forward-socks5 / 127.0.0.1:1080 .">> /etc/privoxy/config
-sudo systemctl enable privoxy >/dev/null
+sudo systemctl enable privoxy
 sudo systemctl restart privoxy
 sudo systemctl status privoxy
 
